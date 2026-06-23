@@ -1,0 +1,73 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+
+    "profiles": {
+      ".indexOn": ["monitorUserUid"],
+      "$uid": {
+        ".read": "auth != null && (auth.uid === $uid || root.child('guardianLinks').child($uid).child(auth.uid).val() === true || root.child('profiles').child(auth.uid).child('monitorUserUid').val() === $uid)",
+        ".write": "auth != null && auth.uid === $uid",
+        "role": {
+          ".validate": "newData.val() === 'user' || newData.val() === 'guardian'"
+        },
+        "relayEnabled": {
+          ".validate": "newData.isBoolean()"
+        },
+        "monitorUserUid": {
+          ".validate": "newData.isString()"
+        },
+        "geofenceEnabled": {
+          ".validate": "newData.isBoolean()"
+        },
+        "geofenceRadiusM": {
+          ".validate": "newData.isNumber() && newData.val() >= 50 && newData.val() <= 5000"
+        }
+      }
+    },
+
+    "guardianLinks": {
+      "$userUid": {
+        "$guardianUid": {
+          ".read": "auth != null && (auth.uid === $userUid || auth.uid === $guardianUid)",
+          ".write": "auth != null && auth.uid === $guardianUid && (newData.val() == null || (newData.val() === true && root.child('profiles').child(auth.uid).child('role').val() === 'guardian' && root.child('profiles').child(auth.uid).child('monitorUserUid').val() === $userUid))",
+          ".validate": "newData.val() == null || newData.val() === true"
+        }
+      }
+    },
+
+    "liveFeeds": {
+      "$userUid": {
+        ".read": "auth != null && (auth.uid === $userUid || root.child('guardianLinks').child($userUid).child(auth.uid).val() === true)",
+        ".write": "auth != null && auth.uid === $userUid"
+      }
+    },
+
+    "navigationSessions": {
+      "$userUid": {
+        ".read": "auth != null && (auth.uid === $userUid || root.child('guardianLinks').child($userUid).child(auth.uid).val() === true)",
+        ".write": "auth != null && (auth.uid === $userUid || root.child('guardianLinks').child($userUid).child(auth.uid).val() === true)"
+      }
+    },
+
+    "guardianAlerts": {
+      "$guardianUid": {
+        ".read": "auth != null && auth.uid === $guardianUid",
+        "$alertId": {
+          ".write": "auth != null && (auth.uid === $guardianUid || root.child('guardianLinks').child(auth.uid).child($guardianUid).val() === true)",
+          ".validate": "newData.hasChildren(['type', 'title', 'body', 'createdAt'])"
+        }
+      }
+    },
+
+    "notificationTokens": {
+      "$uid": {
+        ".read": "auth != null && auth.uid === $uid",
+        "$tokenHash": {
+          ".write": "auth != null && auth.uid === $uid",
+          ".validate": "newData.val() == null || (newData.hasChildren(['token', 'updatedAt']) && newData.child('token').isString())"
+        }
+      }
+    }
+  }
+}

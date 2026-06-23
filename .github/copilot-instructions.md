@@ -1,0 +1,1 @@
+use claude models only

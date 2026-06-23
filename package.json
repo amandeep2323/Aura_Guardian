@@ -1,0 +1,44 @@
+{
+  "name": "react-vite-tailwind",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "firebase:rules": "firebase deploy --only database",
+    "firebase:functions": "npm --prefix functions install && firebase deploy --only functions",
+    "mobile:wrap": "node scripts/wrap-mobile.mjs",
+    "mobile:wrap:open": "node scripts/wrap-mobile.mjs --open-android",
+    "mobile:android": "npm run mobile:wrap:open",
+    "mobile:apk": "node scripts/build-apk.mjs --debug",
+    "mobile:apk:release": "node scripts/build-apk.mjs --release"
+  },
+  "dependencies": {
+    "@capacitor/core": "^7.4.3",
+    "clsx": "2.1.1",
+    "firebase": "^12.12.0",
+    "leaflet": "^1.9.4",
+    "lucide-react": "^1.0.1",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "react-router-dom": "^7.13.2",
+    "tailwind-merge": "3.4.0",
+    "uuid": "^13.0.0",
+    "zustand": "^5.0.12"
+  },
+  "devDependencies": {
+    "@capacitor/android": "^7.4.3",
+    "@capacitor/cli": "^7.4.3",
+    "@tailwindcss/vite": "4.1.17",
+    "@types/node": "^22.0.0",
+    "@types/react": "19.2.7",
+    "@types/react-dom": "19.2.3",
+    "@vitejs/plugin-react": "5.1.1",
+    "tailwindcss": "4.1.17",
+    "typescript": "5.9.3",
+    "vite": "7.2.4",
+    "vite-plugin-singlefile": "2.3.0"
+  }
+}

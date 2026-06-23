@@ -1,0 +1,76 @@
+# Dependencies
+node_modules/
+functions/node_modules/
+
+# Build output
+dist/
+build/
+coverage/
+.vite/
+.turbo/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Local environment and API keys
+.env
+.env.*
+*.env
+*.local
+*.secret.*
+*.secrets.*
+*secret*
+*secrets*
+*credential*
+*credentials*
+*api-key*
+*apikey*
+*api_key*
+*token*
+
+# Firebase and service account secrets
+serviceAccount*.json
+service-account*.json
+firebase-adminsdk*.json
+*.firebase.json
+
+# Key material and certificates
+*.pem
+*.key
+*.p8
+*.p12
+*.pfx
+*.crt
+*.cer
+*.jks
+*.keystore
+
+# Android local and signing config
+android/local.properties
+android/gradle.properties
+android/key.properties
+android/app/google-services.json
+android/app/*.jks
+android/app/*.keystore
+
+# Current key-bearing app config
+src/config/firebase.ts
+public/firebase-messaging-sw.js
+
+# IDE and OS files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Archives
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.rar
+*.7z
